@@ -21,6 +21,7 @@
 ### -  *[Installation](#Installation)*
 ### -  *[For developers](#For-developers)* -->
 ### -  *[Contributors](#Contributors)*
+### -  *[Todo](#TODO)*
 ### -  *[License](#License)*
 
 
@@ -101,6 +102,33 @@ root@dietpi4:~/github/robot-arm# sudo i2cdetect -y 1
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 70: 70 -- -- -- -- -- -- --                    
 ```
+
+-----------------
+# conversion to ros node
+### how i found the correct message format
+### NOPE: [common_msgs - ROS Wiki](http://wiki.ros.org/common_msgs)
+### YEP: [std_msgs - ROS Wiki](http://wiki.ros.org/std_msgs)
+
+#### final datatype i went with 
+#### [std_msgs/Int16MultiArray Documentation](http://docs.ros.org/en/api/std_msgs/html/msg/Int16MultiArray.html)
+```
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int16[]           data          # array of data
+```
+### key info is `int16[]`
+
+-----------------
+# TODO
+- [x] setup on raspberry pi
+- [ ] add controll software similar to this [meisben/easyEEZYbotARM: A python and arduino control library for the EEZYbotARM 3d printed robot arm (Includes 3-D kinematics for Mk1 and Mk2)](https://github.com/meisben/easyEEZYbotARM) 
+- [ ] ros node 
+- [ ] ___________ 
+- [ ] ___________ 
+- [ ] ___________ 
+
 -----------------
 # Contributors
 
