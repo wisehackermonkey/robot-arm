@@ -40,10 +40,67 @@
 <!-- SETUP -->
 -----------------
 # For developers
-### 
+### Install circuit python on raspberry pi 4
+### [Installing CircuitPython Libraries on Raspberry Pi | CircuitPython on Linux and Raspberry Pi | Adafruit Learning System](https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi)
 ```bash
-```
+git clone https://github.com/wisehackermonkey/robot-arm.git
+cd ~/robot-arm
+sudo pip3 install --upgrade adafruit-python-shell
 
+# wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
+sudo apt-get install -y i2c-tools
+pip3 install --upgrade RPi.GPIO
+pip3 install --upgrade adafruit-blinka
+
+ls /dev/i2c* /dev/spi*
+/dev/i2c-1 /dev/spidev0.0 /dev/spidev0.1
+
+```
+### NOTE i had an issue with dietpi spi not working solution is here
+#### [raspbian - Unable to activate SPI module on Raspberry Pi Zero W running on DietPi - Raspberry Pi Stack Exchange](https://raspberrypi.stackexchange.com/questions/70768/unable-to-activate-spi-module-on-raspberry-pi-zero-w-running-on-dietpi) 
+
+### install this library 
+#### [adafruit/Adafruit_CircuitPython_PCA9685: Adafruit CircuitPython driver for PCA9685 16-channel, 12-bit PWM LED & servo driver chip.](https://github.com/adafruit/Adafruit_CircuitPython_PCA9685)
+
+```bash
+pip3 install adafruit-circuitpython-pca9685
+pip3 install adafruit-circuitpython-servokit
+```
+### issue
+```bash
+    raise ValueError("No I2C device at address: 0x%x" % self.device_address)
+ValueError: No I2C device at address: 0x40
+```
+### solution
+```
+sudo i2cdetect -y 1
+
+root@dietpi4:~/github/robot-arm# sudo i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                         
+```
+#### WEIRD!
+##### issue was the pins werint connected! ha. wow. 
+##### [Adafruit customer service forums • View topic - VEML6075 "No I2C device at address: 10" [SOLVED}](https://forums.adafruit.com/viewtopic.php?t=147027)
+```bash
+
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: 70 -- -- -- -- -- -- --                    
+```
 -----------------
 # Contributors
 
