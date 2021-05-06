@@ -15,5 +15,11 @@ time.sleep(1)
 kit.servo[2].angle = 180 -40
 time.sleep(1)
 
+kit.servo[2].angle = 180 -0
+time.sleep(1)
+
+kit.servo[2].angle = 180 -30
+time.sleep(1)
+
 kit.servo[2].angle = 180
 kit.servo[0].angle = 0
