@@ -1,5 +1,11 @@
-# # this is the code that moves the robotic arm using the pcm
-#%%
+# 3d printed Robotic Arm Project 
+# this is the code that moves the robotic arm using the pcm
+
+# by oran collins
+# github.com/wisehackermonkey
+# oranbusiness@gmail.com
+# 20210511
+
 import time
 from adafruit_servokit import ServoKit
  
@@ -7,19 +13,25 @@ from adafruit_servokit import ServoKit
 kit = ServoKit(channels=16)
 
 
-# if __name__ == __main__:
-kit.servo[0].angle = 180
-time.sleep(1)
+def move_arm(server_number, position, delay=1):
+  """this just makes the process for moving the arm easier """
+  kit.servo[server_number].angle = position
+  
+  time.sleep(delay)
 
 
-kit.servo[2].angle = 180 -40
-time.sleep(1)
+# set inital position for arm
+move_arm(0,180)
 
-kit.servo[2].angle = 180 -0
-time.sleep(1)
+# give motion to arm
+move_arm(2, 180 - 40)
 
-kit.servo[2].angle = 180 -30
-time.sleep(1)
+# move arm back to center point 
+move_arm(2,180)
 
-kit.servo[2].angle = 180
-kit.servo[0].angle = 0
+# move arm to left
+move_arm(2, 180 - 30)
+
+# put arm into final position
+move_arm(0,180,0)
+move_arm(2,180,0)
