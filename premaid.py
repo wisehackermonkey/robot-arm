@@ -26,3 +26,10 @@ move_arm(1,180)
 move_arm(2,180)
 move_arm(3,180)
 
+
+move_arm(0,0)
+move_arm(1,0)
+move_arm(2,0)
+move_arm(3,0)
+
+
